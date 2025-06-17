@@ -1,0 +1,36 @@
+img {
+    max-width: 100%;
+}
+
+.info-card-tv,
+.info-card-movie {
+    display: none;
+}
+
+.card:hover {
+    color: white;
+    background-color: rgb(43, 42, 42);
+}
+
+
+/* card tv */
+.card:hover .image-tv {
+    display: none;
+}
+
+
+.card:hover .info-card-tv {
+    display: block;
+
+}
+
+
+
+/* card movie */
+.card:hover .image-movie {
+    display: none;
+}
+
+.card:hover .info-card-movie {
+    display: block;
+}
