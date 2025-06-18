@@ -2,9 +2,19 @@ img {
     max-width: 100%;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .info-card-tv,
 .info-card-movie {
     display: none;
+}
+
+.image-tv,
+.image-movie {   
+    height: 180px;
 }
 
 .card:hover {
@@ -15,22 +25,38 @@ img {
 
 /* card tv */
 .card:hover .image-tv {
-    display: none;
+    display: none !important;
 }
 
 
 .card:hover .info-card-tv {
     display: block;
+    padding: 12px;
+    height: 180px;
 
 }
+
 
 
 
 /* card movie */
 .card:hover .image-movie {
-    display: none;
+    display: none !important;
 }
 
 .card:hover .info-card-movie {
     display: block;
+    padding: 12px;
+    height: 180px;
+}
+
+
+.flag-language {
+    width: 30px;
+}
+
+.logo {
+    color: red;
+    font-size: 1.5rem;
+    font-weight: 600;
 }

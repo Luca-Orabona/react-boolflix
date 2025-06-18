@@ -1,21 +1,20 @@
 
-const FormSearch = ({search, handleSearch, sendData}) => {
-
+const FormSearch = ({searchMovie, setSearchMovie, sendData }) => {
 
     return (
         <form className="row g-3 py-4" onSubmit={sendData}>
 
-            <div className="col-10">
+            <div className="col-9">
                 <input
                     type="text"
                     className="form-control"
                     placeholder="Cerca..."
-                    value={search}
-                    onChange={(e) => handleSearch(e.target.value)}
+                    value={searchMovie}
+                    onChange={(e) => setSearchMovie(e.target.value)}
                 />
             </div>
 
-            <div className="col-2">
+            <div className="col-3">
                 <button type="submit" className="btn btn-primary w-100">Cerca</button>
             </div>
 

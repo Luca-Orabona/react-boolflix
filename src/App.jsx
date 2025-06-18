@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import CardTv from "./components/CardTv";
 import CardMovie from "./components/CardMovie";
 import FormSearch from "./components/FormSearch";
+import AppHeader from "./components/AppHeader";
 
 
 function App() {
@@ -14,14 +15,18 @@ function App() {
 
 
 
-  const apiKey = "?api_key=c50b26832948de6befcd40acdab64c84";
-  const query = searchMovie;
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const query = searchMovie.trim();
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
+
     axios
-      .get(`https://api.themoviedb.org/3/search/movie${apiKey}&query=${query}`)
+      .get(`${apiUrl}/search/movie?api_key=${apiKey}&query=${query}`)
       .then((resp) => {
+
         setDataMovie(resp.data.results);
       })
       .catch((error) => {
@@ -29,8 +34,9 @@ function App() {
       });
 
     axios
-      .get(`https://api.themoviedb.org/3/search/tv${apiKey}&query=${query}`)
+      .get(`${apiUrl}/search/tv?api_key=${apiKey}&query=${query}`)
       .then((resp) => {
+
         setDataTv(resp.data.results);
       })
       .catch((error) => {
@@ -41,45 +47,49 @@ function App() {
   }
 
   return (
+    <>
 
-
-    <div className="container">
-
-      <FormSearch
-        search={searchMovie}
-        handleSearch={setSearchMovie}
+      <AppHeader
+        searchMovie={searchMovie}
+        setSearchMovie={setSearchMovie}
         sendData={handleSubmit}
       />
 
-      {hasSearched && (
-        <>
-          <section className="py-4">
-            <h1>Film</h1>
-            <div className="row row-cols-3 g-3 text-center">
-              {dataMovie.map(curMovie => (
-                <div className="col" key={curMovie.id}>
-                  <CardMovie movie={curMovie} />
+      <main className="bg-secondary">
+        <div className="container">
+
+
+          {hasSearched && (
+            <>
+              <section className="py-4">
+                <h1>Film</h1>
+                <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3 text-center">
+                  {dataMovie.map(curMovie => (
+                    <div className="col" key={curMovie.id}>
+                      <CardMovie movie={curMovie} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </section>
+              </section>
 
-          <hr />
+              <hr />
 
-          <section className="py-3">
-            <h1>Serie TV</h1>
-            <div className="row row-cols-3 g-3 text-center">
-              {dataTv.map(curTv => (
-                <div className="col" key={curTv.id}>
-                  <CardTv tv={curTv} />
+              <section className="py-3">
+                <h1>Serie TV</h1>
+                <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3 text-center">
+                  {dataTv.map(curTv => (
+                    <div className="col" key={curTv.id}>
+                      <CardTv tv={curTv} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
+              </section>
+            </>
+          )}
 
-    </div> 
+        </div>
+      </main>
+    </>
 
   )
 }
